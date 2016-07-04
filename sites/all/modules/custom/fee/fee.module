@@ -1,0 +1,160 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 6/8/16
+ * Time: 9:39 PM
+ * To change this template use File | Settings | File Templates.
+ */
+/**
+ * Implement hook_entity
+ */
+
+function fee_entity_info()
+{
+  return array(
+    'fee' => array(
+      "label" => "Fee",
+      "base table" => "fee",
+      'controller class' => 'FeeController',
+      "fieldable" => false,
+      'entity keys' => array(
+        'id' => 'id',
+      ),
+      'views controller class' => 'FeeViewsController',
+      'view modes' => array(
+        'full' => array(
+          'label' => t('Full content'),
+          'custom settings' => TRUE
+        )
+      )
+    )
+  );
+}
+
+
+/**
+ * Implements hook_menu().
+ * Add menu for order
+ */
+function fee_menu()
+{
+  $item = array();
+  $item['fee/add'] = array(
+    'title' => t('Thêm nhân viên'),
+    'access arguments' => array('fee:*:add'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fee_add_form', 2),
+    'file' => 'includes/fee.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+
+  $item['fee/delete/%fee'] = array(
+    'title' => t('Xóa nhân viên'),
+    'access arguments' => array('fee:*:delete'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fee_delete_form', 2),
+    'file' => 'includes/fee.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  return $item;
+}
+
+/**
+ * @param $id
+ * @return mixedImplement hook_entity_load
+ * Order_load
+ */
+function fee_load($id)
+{
+  $entity = fee_load_multiple(array($id));
+  return reset($entity);
+}
+
+/**
+ * Implements cook table Load Multiple
+ * @Param $ids = array();
+ */
+function fee_load_multiple($ids)
+{
+  return entity_load('fee', $ids);
+}
+
+/**
+ * Implements cook table Create
+ */
+function fee_create($entity)
+{
+  return entity_save('fee', $entity);
+}
+
+/**
+ * Implements cook table Cupdate
+ */
+function fee_save($entity)
+{
+  return entity_save('fee', $entity);
+}
+
+/**
+ * @param $ids
+ * @param $conditions
+ * @return mixed
+ * Implements load cook table with condition
+ */
+function fee_load_multiple_with_conditions($ids, $conditions)
+{
+  return entity_load('fee', $ids, $conditions);
+}
+
+/**
+ * Implements order delete
+ */
+function fee_delete($id)
+{
+  return entity_delete('fee', $id);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function fee_permission()
+{
+  return array(
+    'fee:*:add' => array(
+      'title' => t('Thêm chi phí'),
+    ),
+    'fee:*:delete' => array(
+      'title' => t('Xóa chi phí'),
+    ),
+  );
+}
+
+/**
+ * Implement check exit cook table
+ */
+function fee_get_fee($field, $value)
+{
+  $query = db_select('fee', 'd');
+  $query->fields('d');
+  $query->condition($field, $value, '=');
+  $result = $query->execute()->fetchAll();
+  if ($result) {
+    return $result;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Implement hook_page_alter
+ */
+function fee_page_alter(&$page){
+  if($_GET['q']=='app/fee/manager'){
+    $page['content']['add_fee'] = array(
+      '#weight' => 100,
+      '#markup' => ' <ul class="action-links"><li><a href="/fee/add">Thêm Chi phí</a></li></ul>',
+    );
+  }
+
+}

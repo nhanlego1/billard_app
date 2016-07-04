@@ -1,0 +1,9 @@
+name = Staff Billing
+description = Aplication software for billing
+package = staff
+core = 7.x
+version = "7.x-0.1-beta"
+project = "App"
+
+files[] = includes/staff.controller.inc
+files[] = includes/staff.views_controller.inc

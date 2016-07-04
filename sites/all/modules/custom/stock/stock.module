@@ -1,0 +1,157 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 6/8/16
+ * Time: 9:39 PM
+ * To change this template use File | Settings | File Templates.
+ */
+/**
+ * Implement hook_entity
+ */
+
+function stock_entity_info()
+{
+  return array(
+    'stock_in' => array(
+      "label" => "Stock In",
+      "base table" => "stock_in",
+      'controller class' => 'StockInController',
+      "fieldable" => false,
+      'entity keys' => array(
+        'id' => 'id',
+      ),
+      'views controller class' => 'StockInViewsController',
+      'view modes' => array(
+        'full' => array(
+          'label' => t('Full content'),
+          'custom settings' => TRUE
+        )
+      )
+    ),
+    'stock_out' => array(
+      "label" => "Stock Out",
+      "base table" => "stock_out",
+      'controller class' => 'StockOutController',
+      "fieldable" => false,
+      'entity keys' => array(
+        'id' => 'id',
+      ),
+      'views controller class' => 'StockOutViewsController',
+      'view modes' => array(
+        'full' => array(
+          'label' => t('Full content'),
+          'custom settings' => TRUE
+        )
+      )
+    )
+  );
+}
+
+
+
+/**
+ * Implements hook_menu().
+ * Add menu for stock
+ */
+function stock_menu()
+{
+  $item = array();
+  $item['stock/add'] = array(
+    'title' => t('Nhập kho'),
+    'access arguments' => array('stock:*:add'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('stock_add_form'),
+    'file' => 'includes/stock.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+
+  return $item;
+}
+
+
+/**
+ * @param $id
+ * @return mixedImplement hook_entity_load
+ * stock_load
+ */
+function stock_load($id, $type)
+{
+  $entity = stock_load_multiple(array($id), $type);
+  return reset($entity);
+}
+
+/**
+ * Implements cook table Load Multiple
+ * @Param $ids = array();
+ */
+function stock_load_multiple($ids, $type)
+{
+  return entity_load($type, $ids);
+}
+
+/**
+ * Implements cook table Create
+ */
+function stock_create($entity, $type)
+{
+  return entity_save($type, $entity);
+}
+
+/**
+ * Implements cook table Cupdate
+ */
+function stock_save($entity, $type)
+{
+  return entity_save($type, $entity);
+}
+
+/**
+ * @param $ids
+ * @param $conditions
+ * @return mixed
+ * Implements load cook table with condition
+ */
+function stock_load_multiple_with_conditions($ids, $conditions, $type)
+{
+  return entity_load($type, $ids, $conditions);
+}
+
+/**
+ * Implements stock delete
+ */
+function stock_delete($id, $type)
+{
+  return entity_delete($type, $id);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function stock_permission()
+{
+  return array(
+    'stock:*:add' => array(
+      'title' => t('Nhập kho'),
+    ),
+    'stock:*:manage' => array(
+      'title' => t('Quản lí kho'),
+    ),
+  );
+}
+
+/**
+ * Implement check exit cook table
+ */
+function stock_get_stock($field, $value, $type)
+{
+  $query = db_select($type, 'd');
+  $query->fields('d');
+  $query->condition($field, $value, '=');
+  $result = $query->execute()->fetchAll();
+  if ($result) {
+    return $result;
+  } else {
+    return false;
+  }
+}

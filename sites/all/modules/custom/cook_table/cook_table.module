@@ -1,0 +1,184 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 6/8/16
+ * Time: 9:39 PM
+ * To change this template use File | Settings | File Templates.
+ */
+/**
+ * Implement hook_entity
+ */
+
+function cook_table_entity_info()
+{
+  return array(
+    'cook_table' => array(
+      "label" => "Cook Table",
+      "base table" => "cook_table",
+      'controller class' => 'CookTableController',
+      "fieldable" => false,
+      'entity keys' => array(
+        'id' => 'id',
+      ),
+      'views controller class' => 'CookTableViewsController',
+      'view modes' => array(
+        'full' => array(
+          'label' => t('Full content'),
+          'custom settings' => TRUE
+        )
+      )
+    )
+  );
+}
+
+
+/**
+ * Implements hook_menu().
+ * Add menu for order
+ */
+function cook_table_menu()
+{
+  $item = array();
+  $item['cook-table/add'] = array(
+    'title' => t('Thêm thực đơn'),
+    'access arguments' => array('cook_table:*:add'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('cook_table_add_form', 2),
+    'file' => 'includes/cook_table.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  $item['cook-table/edit/%cook_table'] = array(
+    'title' => t('Cập nhật thực đơn'),
+    'access arguments' => array('cook_table:*:edit'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('cook_table_add_form', 2),
+    'file' => 'includes/cook_table.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+
+  $item['cook-table/delete/%cook_table'] = array(
+    'title' => t('Xóa thực đơn'),
+    'access arguments' => array('cook_table:*:delete'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('cook_table_delete_form', 2),
+    'file' => 'includes/cook_table.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  return $item;
+}
+
+/**
+ * Implement hook_views_api
+ * @return array
+ */
+function cook_table_views_api()
+{
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'cook_table') . '/includes/views',
+  );
+}
+
+/**
+ * @param $id
+ * @return mixedImplement hook_entity_load
+ * Order_load
+ */
+function cook_table_load($id)
+{
+  $entity = cook_table_load_multiple(array($id));
+  return reset($entity);
+}
+
+/**
+ * Implements cook table Load Multiple
+ * @Param $ids = array();
+ */
+function cook_table_load_multiple($ids)
+{
+  return entity_load('cook_table', $ids);
+}
+
+/**
+ * Implements cook table Create
+ */
+function cook_table_create($entity)
+{
+  return entity_save('cook_table', $entity);
+}
+
+/**
+ * Implements cook table Cupdate
+ */
+function cook_table_save($entity)
+{
+  return entity_save('cook_table', $entity);
+}
+
+/**
+ * @param $ids
+ * @param $conditions
+ * @return mixed
+ * Implements load cook table with condition
+ */
+function cook_table_load_multiple_with_conditions($ids, $conditions)
+{
+  return entity_load('cook_table', $ids, $conditions);
+}
+
+/**
+ * Implements order delete
+ */
+function cook_table_delete($id)
+{
+  return entity_delete('cook_table', $id);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function cook_table_permission()
+{
+  return array(
+    'cook_table:*:add' => array(
+      'title' => t('Thêm thực đơn'),
+    ),
+    'cook_table:*:edit' => array(
+      'title' => t('Cập nhật thực đơn'),
+    ),
+    'cook_table:*:delete' => array(
+      'title' => t('Xóa thực đơn'),
+    ),
+  );
+}
+
+/**
+ * Implement check exit cook table
+ */
+function cook_table_get_cook_table($field, $value)
+{
+  $query = db_select('cook_table', 'd');
+  $query->fields('d');
+  $query->condition($field, $value, '=');
+  $result = $query->execute()->fetchAll();
+  if ($result) {
+    return $result;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Implement hook_page_alter
+ */
+function cook_table_page_alter(&$page)
+{
+  if ($_GET['q'] == 'app/cook-table/manager' || $_GET['q'] == 'app/stock-in' || $_GET['q'] == 'app/stock-out') {
+    $page['content']['add_cook_table'] = array(
+      '#weight' => 100,
+      '#markup' => ' <ul class="action-links"><li><a href="/cook-table/add">Nhập thực đơn</a></li><li><a href="/stock/add">Nhập kho</a></li><li><a href="/app/stock-in">Quản lý nhập kho</a></li><li><a href="/app/stock-out">Quản lý xuất kho</a></li></ul>',
+    );
+  }
+
+}

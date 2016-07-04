@@ -1,0 +1,314 @@
+; Packaging information for billard_app
+name = "Billard App"
+description = "Billard App"
+exclusive = "1"
+core = "7.x"
+; ----------
+; Dependencies
+; ----------
+; Administration
+dependencies[] = admin_menu
+dependencies[] = admin_menu_toolbar
+dependencies[] = module_filter
+; Chaos tool suite
+dependencies[] = ctools
+dependencies[] = page_manager
+; Context
+dependencies[] = context
+dependencies[] = context_ui
+; Core
+dependencies[] = block
+dependencies[] = color
+dependencies[] = contextual
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = php
+dependencies[] = rdf
+dependencies[] = shortcut
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = user
+; Date/Time
+dependencies[] = date
+dependencies[] = date_all_day
+dependencies[] = date_api
+dependencies[] = date_context
+dependencies[] = date_migrate
+dependencies[] = date_popup
+dependencies[] = date_repeat
+dependencies[] = date_repeat_field
+dependencies[] = date_tools
+dependencies[] = date_views
+; Development
+dependencies[] = coder
+dependencies[] = coder_review
+dependencies[] = devel
+dependencies[] = profiler_builder
+dependencies[] = profiler_builder_extras
+; Fields
+dependencies[] = entityreference
+; Media
+dependencies[] = imce
+; Migration
+dependencies[] = migrate
+; Other
+dependencies[] = backup_migrate
+dependencies[] = entity
+dependencies[] = entity_token
+dependencies[] = libraries
+dependencies[] = logintoboggan
+dependencies[] = menu_block
+dependencies[] = token
+; Panels
+dependencies[] = panels
+dependencies[] = panels_mini
+; User interface
+dependencies[] = imce_wysiwyg
+dependencies[] = jquery_update
+dependencies[] = wysiwyg
+; Views
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_data_export
+dependencies[] = views_php
+dependencies[] = views_ui
+; app
+dependencies[] = app
+; cook_table
+dependencies[] = cook_table
+; order
+dependencies[] = order
+; order_item
+dependencies[] = order_item
+; staff
+dependencies[] = staff
+; stock
+dependencies[] = stock
+; table
+dependencies[] = table
+; tables
+dependencies[] = tables
+; Features
+dependencies[] = features
+dependencies[] = app_order_structure
+dependencies[] = app_structure
+dependencies[] = cook_table_structure
+dependencies[] = date_migrate_example
+dependencies[] = staff_structure
+dependencies[] = tables_structure
+
+; ----------
+; Variables
+; ----------
+variables[additional_settings__active_tab_drink] = 'edit-menu'
+variables[additional_settings__active_tab_food] = 'edit-menu'
+variables[additional_settings__active_tab_order] = 'edit-menu'
+variables[additional_settings__active_tab_other] = 'edit-menu'
+variables[additional_settings__active_tab_price] = 'edit-menu'
+variables[additional_settings__active_tab_table] = 'edit-menu'
+variables[admin_theme] = 'adminimal'
+variables[anonymous] = 'Anonymous'
+variables[backup_migrate_destination_id] = 'nodesquirrel'
+variables[backup_migrate_profile_id] = 'default'
+variables[cache_class_cache_ctools_css] = 'CToolsCssCache'
+variables[coder_ignore] = 1
+variables[coder_modules][cook_table] = 1
+variables[coder_modules][tables] = 1
+variables[coder_modules][tables_structure] = 1
+variables[coder_reviews][sniffer] = 'sniffer'
+variables[coder_reviews][style] = 'style'
+variables[coder_reviews][comment] = 'comment'
+variables[coder_reviews][sql] = 'sql'
+variables[coder_reviews][security] = 'security'
+variables[coder_reviews][i18n] = 'i18n'
+variables[coder_reviews][upgrade47] = 0
+variables[coder_reviews][upgrade5x] = 0
+variables[coder_reviews][upgrade6x] = 0
+variables[coder_reviews][upgrade7x] = 0
+variables[coder_reviews][upgrade8x] = 0
+variables[coder_reviews][druplart] = 0
+variables[coder_reviews][production] = 0
+variables[coder_reviews][i18n_po] = 0
+variables[coder_severity] = '5'
+variables[configurable_timezones] = 1
+variables[context_block_rebuild_needed] = true
+variables[dashboard_stashed_blocks][0][module] = 'node'
+variables[dashboard_stashed_blocks][0][delta] = 'recent'
+variables[dashboard_stashed_blocks][0][region] = 'dashboard_main'
+variables[dashboard_stashed_blocks][1][module] = 'user'
+variables[dashboard_stashed_blocks][1][delta] = 'new'
+variables[dashboard_stashed_blocks][1][region] = 'dashboard_sidebar'
+variables[dashboard_stashed_blocks][2][module] = 'search'
+variables[dashboard_stashed_blocks][2][delta] = 'form'
+variables[dashboard_stashed_blocks][2][region] = 'dashboard_sidebar'
+variables[dashboard_stashed_blocks][3][module] = 'comment'
+variables[dashboard_stashed_blocks][3][delta] = 'recent'
+variables[dashboard_stashed_blocks][3][region] = 'dashboard_inactive'
+variables[dashboard_stashed_blocks][4][module] = 'user'
+variables[dashboard_stashed_blocks][4][delta] = 'online'
+variables[dashboard_stashed_blocks][4][region] = 'dashboard_inactive'
+variables[date_api_version] = '7.2'
+variables[date_default_timezone] = 'Asia/Ho_Chi_Minh'
+variables[date_first_day] = '0'
+variables[date_views_day_format_without_year] = 'l, F j'
+variables[date_views_day_format_with_year] = 'l, F j, Y'
+variables[date_views_month_format_without_year] = 'F'
+variables[date_views_month_format_with_year] = 'F Y'
+variables[date_views_week_format_without_year] = 'F j'
+variables[date_views_week_format_with_year] = 'F j, Y'
+variables[dblog_row_limit] = '100'
+variables[default_nodes_main] = '10'
+variables[entityreference:base-tables][cook_table][0] = 'cook_table'
+variables[entityreference:base-tables][cook_table][1] = 'id'
+variables[entityreference:base-tables][node][0] = 'node'
+variables[entityreference:base-tables][node][1] = 'nid'
+variables[entityreference:base-tables][order][0] = 'orders'
+variables[entityreference:base-tables][order][1] = 'id'
+variables[entityreference:base-tables][order_item][0] = 'order_item'
+variables[entityreference:base-tables][order_item][1] = 'id'
+variables[entityreference:base-tables][staff][0] = 'staff'
+variables[entityreference:base-tables][staff][1] = 'id'
+variables[entityreference:base-tables][stock_in][0] = 'stock_in'
+variables[entityreference:base-tables][stock_in][1] = 'id'
+variables[entityreference:base-tables][stock_out][0] = 'stock_out'
+variables[entityreference:base-tables][stock_out][1] = 'id'
+variables[entityreference:base-tables][file][0] = 'file_managed'
+variables[entityreference:base-tables][file][1] = 'fid'
+variables[entityreference:base-tables][tables][0] = 'tables'
+variables[entityreference:base-tables][tables][1] = 'id'
+variables[entityreference:base-tables][taxonomy_term][0] = 'taxonomy_term_data'
+variables[entityreference:base-tables][taxonomy_term][1] = 'tid'
+variables[entityreference:base-tables][taxonomy_vocabulary][0] = 'taxonomy_vocabulary'
+variables[entityreference:base-tables][taxonomy_vocabulary][1] = 'vid'
+variables[entityreference:base-tables][user][0] = 'users'
+variables[entityreference:base-tables][user][1] = 'uid'
+variables[entityreference:base-tables][wysiwyg_profile][0] = 'wysiwyg'
+variables[entityreference:base-tables][wysiwyg_profile][1] = 'format'
+variables[error_level] = '2'
+variables[filter_fallback_format] = 'plain_text'
+variables[imce_profiles][1][name] = 'User-1'
+variables[imce_profiles][1][usertab] = 1
+variables[imce_profiles][1][filesize] = 0
+variables[imce_profiles][1][quota] = 0
+variables[imce_profiles][1][tuquota] = 0
+variables[imce_profiles][1][extensions] = '*'
+variables[imce_profiles][1][dimensions] = '1200x1200'
+variables[imce_profiles][1][filenum] = 0
+variables[imce_profiles][1][directories][0][name] = '.'
+variables[imce_profiles][1][directories][0][subnav] = 1
+variables[imce_profiles][1][directories][0][browse] = 1
+variables[imce_profiles][1][directories][0][upload] = 1
+variables[imce_profiles][1][directories][0][thumb] = 1
+variables[imce_profiles][1][directories][0][delete] = 1
+variables[imce_profiles][1][directories][0][resize] = 1
+variables[imce_profiles][1][thumbnails][0][name] = 'Small'
+variables[imce_profiles][1][thumbnails][0][dimensions] = '90x90'
+variables[imce_profiles][1][thumbnails][0][prefix] = 'small_'
+variables[imce_profiles][1][thumbnails][0][suffix] = ''
+variables[imce_profiles][1][thumbnails][1][name] = 'Medium'
+variables[imce_profiles][1][thumbnails][1][dimensions] = '120x120'
+variables[imce_profiles][1][thumbnails][1][prefix] = 'medium_'
+variables[imce_profiles][1][thumbnails][1][suffix] = ''
+variables[imce_profiles][1][thumbnails][2][name] = 'Large'
+variables[imce_profiles][1][thumbnails][2][dimensions] = '180x180'
+variables[imce_profiles][1][thumbnails][2][prefix] = 'large_'
+variables[imce_profiles][1][thumbnails][2][suffix] = ''
+variables[imce_profiles][2][name] = 'Sample profile'
+variables[imce_profiles][2][usertab] = 1
+variables[imce_profiles][2][filesize] = 1
+variables[imce_profiles][2][quota] = 2
+variables[imce_profiles][2][tuquota] = 0
+variables[imce_profiles][2][extensions] = 'gif png jpg jpeg'
+variables[imce_profiles][2][dimensions] = '800x600'
+variables[imce_profiles][2][filenum] = 1
+variables[imce_profiles][2][directories][0][name] = 'u%uid'
+variables[imce_profiles][2][directories][0][subnav] = 0
+variables[imce_profiles][2][directories][0][browse] = 1
+variables[imce_profiles][2][directories][0][upload] = 1
+variables[imce_profiles][2][directories][0][thumb] = 1
+variables[imce_profiles][2][directories][0][delete] = 0
+variables[imce_profiles][2][directories][0][resize] = 0
+variables[imce_profiles][2][thumbnails][0][name] = 'Thumb'
+variables[imce_profiles][2][thumbnails][0][dimensions] = '90x90'
+variables[imce_profiles][2][thumbnails][0][prefix] = 'thumb_'
+variables[imce_profiles][2][thumbnails][0][suffix] = ''
+variables[jquery_update_compression_type] = 'min'
+variables[jquery_update_jquery_admin_version] = '1.7'
+variables[jquery_update_jquery_cdn] = 'google'
+variables[jquery_update_jquery_version] = '1.7'
+variables[logintoboggan_confirm_email_at_registration] = '0'
+variables[logintoboggan_immediate_login_on_register] = 1
+variables[logintoboggan_login_successful_message] = '0'
+variables[logintoboggan_login_with_email] = '1'
+variables[logintoboggan_minimum_password_length] = '0'
+variables[logintoboggan_override_destination_parameter] = 1
+variables[logintoboggan_pre_auth_role] = '5'
+variables[logintoboggan_purge_unvalidated_user_interval] = '0'
+variables[logintoboggan_redirect_on_register] = 'account/manager'
+variables[menu_block_1_depth] = '0'
+variables[menu_block_1_level] = '1'
+variables[menu_block_1_parent] = 'main-menu:0'
+variables[menu_block_2_depth] = '0'
+variables[menu_block_2_level] = '1'
+variables[menu_block_2_parent] = 'user-menu:0'
+variables[menu_block_3_depth] = '0'
+variables[menu_block_3_level] = '1'
+variables[menu_block_3_parent] = 'main-menu:0'
+variables[menu_block_ids][0] = 1
+variables[menu_block_ids][1] = 2
+variables[menu_block_ids][2] = 3
+variables[menu_parent_drink] = 'main-menu:0'
+variables[menu_parent_food] = 'main-menu:0'
+variables[menu_parent_order] = 'main-menu:0'
+variables[menu_parent_other] = 'main-menu:0'
+variables[menu_parent_price] = 'main-menu:0'
+variables[menu_parent_table] = 'main-menu:0'
+variables[module_filter_recent_modules][logintoboggan] = 1467383348
+variables[name] = 'CLB Bida Phi Hùng'
+variables[nodesquirrel_endpoint_urls][0] = 'api.nodesquirrel.com/services/xmlrpc'
+variables[nodesquirrel_schedule] = '86400'
+variables[nodesquirrel_schedule_enabled] = 1
+variables[nodesquirrel_schedule_keep] = -2
+variables[nodesquirrel_schedule_source_id] = 'db'
+variables[nodesquirrel_secret_key] = '90ce16631deac73d498e327fe07c70f2:661dbd29aaad9a3083f233fa2d0ddb5e'
+variables[node_admin_theme] = 1
+variables[node_options_drink][0] = 'status'
+variables[node_options_food][0] = 'status'
+variables[node_options_order][0] = 'status'
+variables[node_options_other][0] = 'status'
+variables[node_options_page][0] = 'status'
+variables[node_options_price][0] = 'status'
+variables[node_options_table][0] = 'status'
+variables[save_continue_drink] = 'Save and add fields'
+variables[save_continue_food] = 'Save and add fields'
+variables[save_continue_order] = 'Save and add fields'
+variables[save_continue_other] = 'Save and add fields'
+variables[save_continue_price] = 'Save and add fields'
+variables[save_continue_table] = 'Save and add fields'
+variables[site_address] = '161 Nguyễn Văn Nghi, F2, Gò Vấp'
+variables[site_email] = 'info@phihung.com.vn'
+variables[site_frontpage] = 'app/frontpage'
+variables[site_phone] = '09123456789'
+variables[theme_default] = 'weebpal_backend'
+variables[user_cancel_method] = 'user_cancel_block'
+variables[user_default_timezone] = '0'
+variables[user_email_verification] = true
+variables[user_picture_dimensions] = '1024x1024'
+variables[user_picture_file_size] = '800'
+variables[user_picture_path] = 'pictures'
+variables[user_picture_style] = 'thumbnail'
+variables[user_register] = '0'
+

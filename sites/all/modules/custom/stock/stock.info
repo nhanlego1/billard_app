@@ -1,0 +1,9 @@
+name = Stock Manager
+description = Aplication software for billing
+package = stock
+core = 7.x
+version = "7.x-0.1-beta"
+project = "App"
+
+files[] = includes/stock.controller.inc
+files[] = includes/stock.views_controller.inc

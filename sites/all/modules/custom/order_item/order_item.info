@@ -1,0 +1,8 @@
+name = Order Item Billing
+description = Aplication software for billing
+package = order_item
+core = 7.x
+version = "7.x-0.1-beta"
+project = "App"
+
+files[] = includes/order_item.controller.inc

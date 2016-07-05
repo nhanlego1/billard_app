@@ -93,7 +93,7 @@ function tables_add_form_submit($form, &$form_state)
     $entity->changed = $form_state['values']['changed'];
     if (tables_save($entity)) {
       drupal_set_message(t('Bàn ' . $form_state['values']['name'] . ' đã được cập nhật thành công.'), 'status');
-      $form_state['redirect'] = 'admin/tables/manager';
+      $form_state['redirect'] = 'app/tables/manager';
     } else {
       drupal_set_message(t('Bàn ' . $form_state['values']['name'] . ' không được cập nhật thành công. Vui lòng thử lại.'), 'error');
     }
@@ -106,7 +106,7 @@ function tables_add_form_submit($form, &$form_state)
     $entity->changed = $form_state['values']['changed'];
     if (tables_create($entity)) {
       drupal_set_message(t('Bàn ' . $form_state['values']['name'] . ' đã được tạo thành công.'), 'status');
-      $form_state['redirect'] = 'admin/tables/manager';
+      $form_state['redirect'] = 'app/tables/manager';
     } else {
       drupal_set_message(t('Bàn ' . $form_state['values']['name'] . ' không được tạo thành công. Vui lòng thử lại.'), 'error');
     }

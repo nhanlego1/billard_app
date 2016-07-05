@@ -140,7 +140,7 @@ function staff_add_form_submit($form, &$form_state)
     $entity->changed = $form_state['values']['changed'];
     if (staff_save($entity)) {
       drupal_set_message(t('Nhân viên ' . $form_state['values']['name'] . ' đã được cập nhật thành công.'), 'status');
-      $form_state['redirect'] = 'admin/staff/manager';
+      $form_state['redirect'] = 'app/staff/manager';
     } else {
       drupal_set_message(t('Nhân viên ' . $form_state['values']['name'] . ' không được cập nhật thành công. Vui lòng thử lại.'), 'error');
     }
@@ -157,7 +157,7 @@ function staff_add_form_submit($form, &$form_state)
     $entity->changed = $form_state['values']['changed'];
     if (staff_create($entity)) {
       drupal_set_message(t('Nhân viên ' . $form_state['values']['name'] . ' đã được tạo thành công.'), 'status');
-      $form_state['redirect'] = 'admin/staff/manager';
+      $form_state['redirect'] = 'app/staff/manager';
     } else {
       drupal_set_message(t('Nhân viên ' . $form_state['values']['name'] . ' không được tạo thành công. Vui lòng thử lại.'), 'error');
     }
@@ -176,7 +176,7 @@ function staff_delete_form($form, &$form_state, $entity)
     '#markup' => t('<h3>Bạn có muốn xóa @title không ?</h3>', array('@title' => $entity->name)),
   );
   $form['cancel'] = array(
-    '#markup' => '<div class="cancel-link">' . l('Cancel', 'admin/staff/manager', array('attributes' => array('id' => 'edit-cancel'))) . '</div>'
+    '#markup' => '<div class="cancel-link">' . l('Cancel', 'app/staff/manager', array('attributes' => array('id' => 'edit-cancel'))) . '</div>'
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -195,5 +195,5 @@ function staff_delete_form_submit($form, &$form_state)
   $entity = $form_state['staff'];
   staff_delete($entity->id);
   drupal_set_message(t('@title đã được xóa thành công.', array('@title' => $entity->name)), 'status');
-  $form_state['redirect'] = 'admin/staff/manager';
+  $form_state['redirect'] = 'app/staff/manager';
 }

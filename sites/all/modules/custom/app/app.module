@@ -554,8 +554,13 @@ function app_app_info(){
   $output .='<div class="app-info">';
   $output .='<h3>'.variable_get('name').'</h3>';
   $output .='<p>Địa chỉ: '.variable_get('site_address').'</p>';
-  $output .='<p>Email: '.variable_get('site_email').'</p>';
-  $output .='<p>Điện thoại: '.variable_get('site_phone').'</p>';
+  if(variable_get('site_email')){
+    $output .='<p>Email: '.variable_get('site_email').'</p>';
+  }
+  if(variable_get('site_phone')){
+    $output .='<p>Điện thoại: '.variable_get('site_phone').'</p>';
+  }
+
   $output .='</div>';
   return $output;
 }

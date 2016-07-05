@@ -49,6 +49,14 @@ function order_menu()
     'file' => 'includes/order.page.inc',
     'type' => MENU_LOCAL_ACTION
   );
+  $item['app/order/debt/%order'] = array(
+    'title' => t('Thanh toán công nợ'),
+    'access arguments' => array('order:*:add'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('order_debt_form', 3),
+    'file' => 'includes/order.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
   $item['order/edit/%order'] = array(
     'title' => t('Cập nhật hóa đơn'),
     'access arguments' => array('order:*:edit'),

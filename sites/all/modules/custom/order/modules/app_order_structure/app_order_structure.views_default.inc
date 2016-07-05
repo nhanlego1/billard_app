@@ -100,7 +100,8 @@ function app_order_structure_views_default_views() {
   $handler->display->display_options['fields']['id_1']['field'] = 'id';
   $handler->display->display_options['fields']['id_1']['label'] = 'Xem hóa đơn';
   $handler->display->display_options['fields']['id_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['id_1']['alter']['text'] = '<a class="action" target="_blank" href="/app/print/[id]">Xem hóa đơn</a>';
+  $handler->display->display_options['fields']['id_1']['alter']['text'] = '<a class="action" target="_blank" href="/app/print/[id]">Xem hóa đơn</a>
+<a id="edit-cancel"  href="/app/order/debt/[id]">Thanh toán</a>';
   $handler->display->display_options['fields']['id_1']['separator'] = '';
   /* Sort criterion: Order: Order ID */
   $handler->display->display_options['sorts']['id']['id'] = 'id';
@@ -194,14 +195,13 @@ function app_order_structure_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Quản lý hóa đơn và doanh thu';
+  $handler->display->display_options['title'] = 'Quản lý hóa đơn';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
     3 => '3',
-    5 => '5',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -209,14 +209,6 @@ function app_order_structure_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Header: Global: PHP */
-  $handler->display->display_options['header']['php']['id'] = 'php';
-  $handler->display->display_options['header']['php']['table'] = 'views';
-  $handler->display->display_options['header']['php']['field'] = 'php';
-  $handler->display->display_options['header']['php']['php_output'] = '<div class="total-amount-all">
-<h3>Tổng doanh thu: <?php print order_get_total_amount($results); ?></h3>
-</div>
-';
   /* Field: Order: Order ID */
   $handler->display->display_options['fields']['id']['id'] = 'id';
   $handler->display->display_options['fields']['id']['table'] = 'orders';
@@ -334,7 +326,7 @@ function app_order_structure_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'app/order';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Quản lý hóa đơn và doanh thu';
+  $handler->display->display_options['menu']['title'] = 'Quản lý hóa đơn';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
@@ -342,6 +334,13 @@ function app_order_structure_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    4 => '4',
+    3 => '3',
+    5 => '5',
+  );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Order: Order ID */
   $handler->display->display_options['fields']['id']['id'] = 'id';

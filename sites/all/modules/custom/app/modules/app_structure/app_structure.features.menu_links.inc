@@ -67,6 +67,23 @@ function app_structure_menu_default_menu_links() {
     'weight' => -47,
     'customized' => 1,
   );
+  // Exported menu link: main-menu_qun-l-chi-ph:app/fee/manager.
+  $menu_links['main-menu_qun-l-chi-ph:app/fee/manager'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'app/fee/manager',
+    'router_path' => 'app/fee/manager',
+    'link_title' => 'Quản lý chi phí',
+    'options' => array(
+      'identifier' => 'main-menu_qun-l-chi-ph:app/fee/manager',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 0,
+  );
   // Exported menu link: main-menu_qun-l-cng-n:app/order/debt.
   $menu_links['main-menu_qun-l-cng-n:app/order/debt'] = array(
     'menu_name' => 'main-menu',
@@ -83,6 +100,23 @@ function app_structure_menu_default_menu_links() {
     'expanded' => 0,
     'weight' => -48,
     'customized' => 1,
+  );
+  // Exported menu link: main-menu_qun-l-ha-n:app/order.
+  $menu_links['main-menu_qun-l-ha-n:app/order'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'app/order',
+    'router_path' => 'app/order',
+    'link_title' => 'Quản lý hóa đơn',
+    'options' => array(
+      'identifier' => 'main-menu_qun-l-ha-n:app/order',
+    ),
+    'module' => 'system',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 0,
   );
   // Exported menu link: main-menu_qun-l-kho-v-thc-n:app/cook-table/manager.
   $menu_links['main-menu_qun-l-kho-v-thc-n:app/cook-table/manager'] = array(
@@ -135,16 +169,39 @@ function app_structure_menu_default_menu_links() {
     'weight' => -43,
     'customized' => 1,
   );
+  // Exported menu link: main-menu_qun-l-thu-chi:fee/day/manager.
+  $menu_links['main-menu_qun-l-thu-chi:fee/day/manager'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'fee/day/manager',
+    'router_path' => 'fee/day/manager',
+    'link_title' => 'Quản lý thu chi',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'main-menu_qun-l-thu-chi:fee/day/manager',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
+    'customized' => 1,
+  );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Cập nhật thông tin CLB');
   t('Dashboard');
   t('Quản lý Bàn');
+  t('Quản lý chi phí');
   t('Quản lý công nợ');
+  t('Quản lý hóa đơn');
   t('Quản lý kho và thực đơn');
   t('Quản lý người dùng');
   t('Quản lý nhân viên');
+  t('Quản lý thu chi');
 
   return $menu_links;
 }

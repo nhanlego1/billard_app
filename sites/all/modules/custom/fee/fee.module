@@ -48,9 +48,16 @@ function fee_menu()
     'file' => 'includes/fee.page.inc',
     'type' => MENU_LOCAL_ACTION
   );
-
+  $item['fee/day/manager'] = array(
+    'title' => t('Quản lý thu chi'),
+    'access arguments' => array('fee:*:manager'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fee_manager_form'),
+    'file' => 'includes/fee.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
   $item['fee/delete/%fee'] = array(
-    'title' => t('Xóa nhân viên'),
+    'title' => t('Xóa chi phí'),
     'access arguments' => array('fee:*:delete'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('fee_delete_form', 2),
@@ -127,9 +134,31 @@ function fee_permission()
     'fee:*:delete' => array(
       'title' => t('Xóa chi phí'),
     ),
+    'fee:*:manager' => array(
+      'title' => t('Quản lý thu chi'),
+    ),
   );
 }
 
+
+/**
+ * Implement hook_theme()
+ * theme for app
+ */
+function fee_theme(){
+  $module_path = drupal_get_path('module', 'fee');
+  return array(
+    'fee_fun' => array(
+      'template' => 'fee-fun',
+      'path' => $module_path.'/theme',
+    ),
+    'fee_fee' => array(
+      'template' => 'fee-fee',
+      'path' => $module_path.'/theme',
+    ),
+
+  );
+}
 /**
  * Implement check exit cook table
  */
@@ -157,4 +186,78 @@ function fee_page_alter(&$page){
     );
   }
 
+}
+
+/**
+ * get doanh thu trong ngay
+ */
+function fee_get_total_fun($from = null, $to = null){
+  $query = db_select('orders','od');
+  $query->fields('od');
+
+  if($from && $to){
+    $query->condition('created',array($from, $to), 'BETWEEN');
+  }elseif($from && !$to){
+    $to = strtotime(date('Y-m-d').' 23:59:59');
+    $query->condition('created',array($from, $to), 'BETWEEN');
+  }elseif($to && !$from){
+    $to = strtotime(date('Y-m-d').' 23:59:59');
+    $query->condition('created',$to, '<=');
+  }else{
+    $from = strtotime(date('Y-m-d').' 00:00:00');
+    $to = strtotime(date('Y-m-d').' 23:59:59');
+    $query->condition('created',array($from, $to), 'BETWEEN');
+  }
+  $query->condition('status',1,'=');
+  $result = $query->execute()->fetchAll();
+  $return = array();
+  $return['total'] = 0;
+  $return['orders'] = array();
+  if($result){
+    foreach($result as $o){
+      $order = order_load($o->id);
+      $return['orders'][$o->id] = $order;
+      $return['total'] += $order->total_all_amount;
+    }
+
+  }
+  return $return;
+}
+
+/**
+ * @param null $from
+ * @param null $to
+ * @return array
+ */
+function fee_get_fee_fun($from = null, $to = null){
+  $query = db_select('fee','fe');
+  $query->fields('fe');
+
+  if($from && $to){
+    $query->condition('fee_date',array($from, $to), 'BETWEEN');
+  }elseif($from && !$to){
+    $to = strtotime(date('Y-m-d').' 23:59:59');
+    $query->condition('fee_date',array($from, $to), 'BETWEEN');
+  }elseif($to && !$from){
+    $to = strtotime(date('Y-m-d').' 23:59:59');
+    $query->condition('fee_date',$to, '<=');
+  }else{
+    $from = strtotime(date('Y-m-d').' 00:00:00');
+    $to = strtotime(date('Y-m-d').' 23:59:59');
+    $query->condition('fee_date',array($from, $to), 'BETWEEN');
+  }
+  $result = $query->execute()->fetchAll();
+  $return = array();
+  $return['total'] = 0;
+  $return['fees'] = array();
+  $fees = array();
+  if($result){
+    foreach($result as $fe){
+      $fee = fee_load($fe->id);
+      $fees[] = $fee;
+      $return['total'] += $fee->fee_total;
+    }
+   $return['fees'] = $fees;
+  }
+  return $return;
 }

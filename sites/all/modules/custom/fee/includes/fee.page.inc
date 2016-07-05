@@ -123,3 +123,79 @@ function fee_delete_form_submit($form, &$form_state)
   drupal_set_message(t('@title đã được xóa thành công.', array('@title' => $entity->reason)), 'status');
   $form_state['redirect'] = 'app/fee/manager';
 }
+
+/**
+ * Implement manage thu chi
+ */
+function fee_manager_form($form, &$form_state){
+  $from = null;
+  $to = null;
+  $label_fun = t('Doanh thu hôm nay');
+  $label_fee = t('Chi phí hôm nay');
+  $form['#method'] = 'get';
+  $form['from'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('Từ Ngày'),
+    '#default_value' => 'now',
+    '#require' => FALSE,
+    '#date_format' => 'Y-m-d',
+    '#date_label_position' => 'within',
+    '#date_increment' => 15,
+    '#date_year_range' => '-3:+10',
+  );
+  $form['to'] = array(
+    '#type' => 'date_popup',
+    '#title' => t('Đến Ngày'),
+    '#default_value' => 'now',
+    '#require' => FALSE,
+    '#date_format' => 'Y-m-d',
+    '#date_label_position' => 'within',
+    '#date_increment' => 15,
+    '#date_year_range' => '-3:+10',
+  );
+
+  $form['submit'] = array(
+    '#type'=>'submit',
+    '#value'=>t('Xem')
+  );
+  if(isset($_GET['from']['date']) &&!empty($_GET['from']['date']) && isset($_GET['to']['date']) && !empty($_GET['to']['date'])){
+    $to = strtotime($_GET['to']['date']);
+    $from = strtotime($_GET['from']['date']);
+    $label_fun = t('Doanh thu từ ngày '.date('d/m/Y',$from).' đến ngày '.date('d/m/Y',$to));
+    $label_fee = t('Chi phí từ ngày '.date('d/m/Y',$from).' đến ngày '.date('d/m/Y',$to));
+  }
+  elseif(isset($_GET['from']['date']) && !empty($_GET['from']['date']) && !$_GET['to']['date']){
+    $from = strtotime($_GET['from']['date']);
+    $label_fun = t('Doanh thu từ ngày '.date('d/m/Y',$from));
+    $label_fee = t('Chi phí từ ngày '.date('d/m/Y',$from));
+  }
+  elseif(isset($_GET['to']['date']) && !empty($_GET['to']['date']) && !$_GET['from']['date']){
+    $to = strtotime($_GET['to']['date']);
+    $label_fun = t('Doanh thu đến ngày '.date('d/m/Y',$to));
+    $label_fee = t('Chi phí đến ngày '.date('d/m/Y',$to));
+  }
+  $fun = fee_get_total_fun($from, $to);
+  $fun_result = theme('fee_fun',array('fun'=>$fun));
+  $fee = fee_get_fee_fun($from, $to);
+  $fee_result = theme('fee_fee',array('fee'=>$fee));
+
+
+
+  $form['get_total'] = array(
+    '#markup'=>'<div class="total-get-fun"><h3>'.$label_fun.'</h3>'.$fun_result.'</div>',
+  );
+  $form['get_fee'] = array(
+    '#markup'=>'<div class="total-get-fee"><h3>'.$label_fee.'</h3>'.$fee_result.'</div>',
+  );
+  $form['from_value'] = array(
+    '#type'=>'hidden',
+    '#value' => isset($_GET['from']['date']) ? $_GET['from']['date'] : '',
+    '#attributes'=>array('class'=>'fromdate_value')
+  );
+  $form['to_value'] = array(
+    '#type'=>'hidden',
+    '#value' => isset($_GET['to']['date']) ? $_GET['to']['date'] : '',
+    '#attributes'=>array('class'=>'todate_value')
+  );
+  return $form;
+}

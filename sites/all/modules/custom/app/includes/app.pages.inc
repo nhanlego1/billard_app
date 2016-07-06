@@ -252,7 +252,12 @@ function app_order_bill_form($form, &$form_state){
     '#type' => 'select',
     '#title' =>t('Số khách tham gia'),
     '#options' => array(0=>t('Bình thường'),2=>2, 3=>3, 4=>4, 5=>5, 6=>6, 7=>7, 8=>8, 9=>9, 10=>10),
-    '#default_value'=>0
+    '#default_value'=>0,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="table_type"]' => array('value' => 1),
+      ),
+    ),
   );
   $form['customer'] = array(
     '#type' => 'textfield',
@@ -272,12 +277,12 @@ function app_order_bill_form($form, &$form_state){
 
   $form['paid'] = array(
     '#type' => 'textfield',
-    '#title' =>t('Thanh toán'),
+    '#title' =>t('Trả trước'),
     '#default_value'=>app_get_current_total($table),
   );
   $form['amount'] = array(
     '#type' => 'textfield',
-    '#title' =>t('Tổng thanh toán'),
+    '#title' =>t('Thanh toán'),
     '#default_value'=>app_get_current_total($table),
     '#attributes'=>array('disabled'=>true)
   );

@@ -553,7 +553,10 @@ function app_app_info(){
   $output = '';
   $output .='<div class="app-info">';
   $output .='<h3>'.variable_get('name').'</h3>';
-  $output .='<p>Địa chỉ: '.variable_get('site_address').'</p>';
+  if(variable_get('site_address')){
+    $output .='<p>Địa chỉ: '.variable_get('site_address').'</p>';
+  }
+
   if(variable_get('site_email')){
     $output .='<p>Email: '.variable_get('site_email').'</p>';
   }

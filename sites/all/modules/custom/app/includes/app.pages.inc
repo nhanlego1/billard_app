@@ -279,6 +279,11 @@ function app_order_bill_form($form, &$form_state){
     '#type' => 'textfield',
     '#title' =>t('Trả trước'),
     '#default_value'=>app_get_current_total($table),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="debt"]' => array('value' => 1),
+      ),
+    ),
   );
   $form['amount'] = array(
     '#type' => 'textfield',

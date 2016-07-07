@@ -357,14 +357,16 @@ function app_food_add_form($form, &$form_state){
     '#markup'=> render($list),
   );
   $form['cook_table'] = array(
-    '#type' => 'select',
+    '#type' => 'checkboxes',
     '#title' =>t('Chọn thực đơn'),
     '#options' => app_get_cook_table_array(),
+    '#suffix'=>'<div class="clearfix"></div>'
   );
   $form['quantity'] = array(
     '#type' => 'textfield',
     '#title' =>t('Số lượng'),
     '#default_value' => 1,
+
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -381,34 +383,40 @@ function app_food_add_form_submit($form, &$form_state){
   global $user;
   $table = $form_state['table'];
   $order = app_check_table_ready($table);
-  $cook_table_id = $form_state['values']['cook_table'];
-  $cook_table = cook_table_load($cook_table_id);
-  $qty = $form_state['values']['quantity'];
-  $order_item = app_load_update_cook_table($table, $order, $cook_table_id);
-  if($order_item){
-    $total_qty = $qty + $order_item->quantity;
-    $order_item->quantity = $total_qty;
-    $order_item->total_amount = $cook_table->price * $total_qty;
-    $order_item->changed = time();
-    $order_items = order_item_save($order_item);
-    app_stock_out($qty, $cook_table, $order);
+  $cook_table_array = $form_state['values']['cook_table'];
+ foreach($cook_table_array as $cook_table_id){
+   if($cook_table_id > 0){
+     $cook_table = cook_table_load($cook_table_id);
+     $qty = $form_state['values']['quantity'];
+     $order_item = app_load_update_cook_table($table, $order, $cook_table_id);
+     if($order_item){
+       $total_qty = $qty + $order_item->quantity;
+       $order_item->quantity = $total_qty;
+       $order_item->total_amount = $cook_table->price * $total_qty;
+       $order_item->changed = time();
+       $order_items = order_item_save($order_item);
+       app_stock_out($qty, $cook_table, $order);
 
-  }else{
-    //update stock
-    app_stock_out($qty, $cook_table, $order);
-    $order_item = new stdClass();
-    $order_item->uid = $user->uid;
-    $order_item->type = 'cook_table';
-    $order_item->order_id = $order->id;
-    $order_item->cook_table = $cook_table_id;
-    $order_item->table_id = $table->id;
-    $order_item->amount = $cook_table->price;
-    $order_item->quantity = $qty;
-    $order_item->total_amount = $cook_table->price * $qty;
-    $order_item->status = 1;
-    $order_item->created = time();
-    $order_items = order_item_save($order_item);
-  }
+     }else{
+       //update stock
+       app_stock_out($qty, $cook_table, $order);
+       $order_item = new stdClass();
+       $order_item->uid = $user->uid;
+       $order_item->type = 'cook_table';
+       $order_item->order_id = $order->id;
+       $order_item->cook_table = $cook_table_id;
+       $order_item->table_id = $table->id;
+       $order_item->amount = $cook_table->price;
+       $order_item->quantity = $qty;
+       $order_item->total_amount = $cook_table->price * $qty;
+       $order_item->status = 1;
+       $order_item->created = time();
+       $order_items = order_item_save($order_item);
+     }
+   }
+
+ }
+
 
   // Tell the browser to close the modal.
   $new_list = render(app_cook_table_list($table, $order));
@@ -424,7 +432,6 @@ function app_get_cook_table_array(){
   $query->orderBy('name','ASC');
   $result = $query->execute()->fetchAll();
   $return = array();
-  $return[''] = t('Chọn thực đơn');
   if($result){
     foreach($result as $t){
       $return[$t->id] = $t->name;
@@ -602,7 +609,10 @@ function app_stock_out($qty = 0, $cook, $order){
   $stock_out->created = REQUEST_TIME;
   stock_save($stock_out, 'stock_out');
   //remove to cook_table item
-  $cook->stock = $cook->stock - $qty;
+  if($cook->stock > $qty){
+    $cook->stock = $cook->stock - $qty;
+  }
+
   cook_table_save($cook);
 }
 

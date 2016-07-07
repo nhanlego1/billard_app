@@ -6,10 +6,10 @@
  * Time: 5:57 PM
  * To change this template use File | Settings | File Templates.
  */
-
+global $user;
 ?>
 <script type="text/javascript">
-  setInterval(function(){
+  setInterval(function () {
     jQuery(".loading").show();
     window.location.reload();
   }, 120000);
@@ -95,28 +95,31 @@
             <?php endif; ?>
           </td>
           <td>
-            <span class="mobile-app">Reset lại giờ: </span>
-            <?php if ($table->order): ?>
-              <a id="edit-cancel" class="ctools-use-modal"
-                 href="/app/hour/change/<?php print $table->id ?>/nojs"><?php print t('Nhập lại giờ') ?></a>
-            <?php else: ?>
-              <?php print t('Nhập lại giờ') ?>
+            <?php if (!in_array('seller', $user->roles)): ?>
+              <span class="mobile-app">Reset lại giờ: </span>
+              <?php if ($table->order): ?>
+                <a id="edit-cancel" class="ctools-use-modal"
+                   href="/app/hour/change/<?php print $table->id ?>/nojs"><?php print t('Nhập lại giờ') ?></a>
+              <?php else: ?>
+                <?php print t('Nhập lại giờ') ?>
+              <?php endif; ?>
             <?php endif; ?>
           </td>
           <td>
-            <span class="mobile-app">Xóa bàn: </span>
-            <?php if ($table->order): ?>
-              <a data="<?php print $table->order->id ?>" class="cancel-table">
+            <?php if (!in_array('seller', $user->roles)): ?>
+              <span class="mobile-app">Xóa bàn: </span>
+              <?php if ($table->order): ?>
+                <a data="<?php print $table->order->id ?>" class="cancel-table">
+                  <img width="20"
+                       height="auto"
+                       src="<?php print base_path() . drupal_get_path('module', 'app') ?>/image/delete-icon.gif"/>
+                </a>
+              <?php else: ?>
                 <img width="20"
                      height="auto"
                      src="<?php print base_path() . drupal_get_path('module', 'app') ?>/image/delete-icon.gif"/>
-              </a>
-            <?php else: ?>
-              <img width="20"
-                   height="auto"
-                   src="<?php print base_path() . drupal_get_path('module', 'app') ?>/image/delete-icon.gif"/>
+              <?php endif; ?>
             <?php endif; ?>
-
           </td>
         </tr>
       <?php endforeach; ?>
@@ -125,4 +128,6 @@
   </table>
 </div>
 
-<div style="display: none;" class="loading"><img src="<?php print base_path().drupal_get_path('module','app') ?>/image/loading7_orange.gif" width="100" height="auto"/></div>
+<div style="display: none;" class="loading"><img
+      src="<?php print base_path() . drupal_get_path('module', 'app') ?>/image/loading7_orange.gif" width="100"
+      height="auto"/></div>

@@ -173,7 +173,7 @@ function staff_get_staff($field, $value)
  * Implement hook_page_alter
  */
 function staff_page_alter(&$page){
-  if($_GET['q']=='admin/staff/manager'){
+  if($_GET['q']=='app/staff/manager'){
     $page['content']['add_staff'] = array(
       '#weight' => 100,
       '#markup' => ' <ul class="action-links"><li><a href="/staff/add">Thêm nhân viên</a></li></ul>',

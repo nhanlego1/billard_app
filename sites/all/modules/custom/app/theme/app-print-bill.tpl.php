@@ -104,7 +104,7 @@
   <div class="footer-info">
     <p><i>Cám ơn quý khách đã ủng hộ <?php print variable_get('name', 'Câu lạc bộ Bida Phi Hùng') ?></i></p>
 
-    <p><i>Chúc quý khác có buổi giải trí vui vẻ và bổ ích </i></p>
+    <p><i>Chúc quý khác có buổi giải trí vui vẻ và thoải mái </i></p>
 
     <p><i>Hẹn gặp lại quý khách </i></p>
   </div>

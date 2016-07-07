@@ -292,6 +292,15 @@ a.action, a.action-links {
 .line-item-header{
     width: 100%;
 }
+
+#edit-cook-table .form-type-checkbox{
+    width: 13%;
+    float:left;
+}
+.form-item-quantity{
+    clear:both;
+    padding-top: 30px;
+}
 @media only screen and (max-width: 1024px)  {
     .table-list-wrapper tbody:first-child{
         display: none;

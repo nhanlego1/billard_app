@@ -38,11 +38,16 @@ function cook_table_add_form($form, &$form_state, $entity)
     '#default_value' => isset($entity->price) ? $entity->price : '',
     '#require' => true,
   );
+  $status = false;
+  if (in_array('seller', $user->roles)){
+    $status = true;
+  }
   $form['cook_table']['stock'] = array(
     '#type' => 'textfield',
     '#title' => t('Tồn kho'),
     '#default_value' => isset($entity->stock) ? $entity->stock : '',
     '#require' => true,
+    '#attributes'=>array('disabled'=>$status),
   );
 
   $form['cook_table']['created'] = array(

@@ -439,8 +439,6 @@ a.action, a.action-links {
         margin-bottom: 10px;
         float: left;
         width: 100%;
-    }
-    .item-amount span{
         font-weight: bolder;
         font-size: 16px;
     }

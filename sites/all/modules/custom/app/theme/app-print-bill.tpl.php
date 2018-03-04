@@ -71,39 +71,39 @@
     <div class="total-print">
         <div class="item-amount">
             <label> Tổng cộng:</label>
-            <span><?php print number_format($order->total_amount) ?> đ</span>
+           <?php print number_format($order->total_amount) ?> đ
         </div>
         <div class="item-amount">
             <label> Giảm giá:</label>
-            <span><?php print $order->promotion ?> %</span>
+            <?php print $order->promotion ?> %
         </div>
         <div class="item-amount">
             <label> Tổng thanh toán:</label>
-            <span><?php print number_format($order->total_all_amount) ?> đ</span>
+            <?php print number_format($order->total_all_amount) ?> đ
         </div>
         <?php if ($order->debt == 1): ?>
             <div class="item-amount">
                 <label> Trả trước:</label>
-                <span><?php print number_format($order->paid) ?> đ</span>
+                <?php print number_format($order->paid) ?> đ
             </div>
             <div class="item-amount">
                 <label> Nợ:</label>
-                <span><?php print number_format($order->exist_amount) ?> đ</span>
+               <?php print number_format($order->exist_amount) ?> đ
             </div>
         <?php endif; ?>
         <?php if ($order->table_type > 0 && $order->number_customer > 0): ?>
             <div class="line-item-header">&nbsp;</div>
             <div class="item-amount">
                 <label> Loại bàn:</label>
-                <span><?php print t('Bàn 4 bi / 3C / dù'); ?></span>
+                <?php print t('Bàn 4 bi / 3C / dù'); ?>
             </div>
             <div class="item-amount">
                 <label> Số khách tham gia:</label>
-                <span><?php print $order->number_customer; ?></span>
+                <?php print $order->number_customer; ?>
             </div>
             <div class="item-amount">
                 <label> Số tiền cho mỗi khách:</label>
-                <span><?php print number_format($order->total_all_amount / $order->number_customer); ?> đ</span>
+                <?php print number_format($order->total_all_amount / $order->number_customer); ?> đ
             </div>
         <?php endif; ?>
     </div>

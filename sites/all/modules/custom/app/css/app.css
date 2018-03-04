@@ -439,8 +439,10 @@ a.action, a.action-links {
         margin-bottom: 10px;
         float: left;
         width: 100%;
-        font-weight: bolder;
-        font-size: 16px;
+    }
+    .item-amount span{
+        /*font-weight: bolder;*/
+        /*font-size: 16px;*/
     }
     .item-amount label{
         text-align: right;

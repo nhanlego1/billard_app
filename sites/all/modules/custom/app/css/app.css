@@ -372,6 +372,10 @@ a.action, a.action-links {
     table th, table th.checkbox, table td{
         padding: 0px!important;
     }
+    #edit-cook-table .form-type-checkbox {
+        width: 50%!important;
+        float: left;
+    }
 }
 @media print
 {

@@ -1,0 +1,193 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 6/8/16
+ * Time: 9:39 PM
+ * To change this template use File | Settings | File Templates.
+ */
+/**
+ * Implement hook_entity
+ */
+
+function order_entity_info()
+{
+  return array(
+    'order' => array(
+      "label" => "Order",
+      "base table" => "orders",
+      'controller class' => 'OrderController',
+      "fieldable" => false,
+      'entity keys' => array(
+        'id' => 'id',
+      ),
+      'views controller class' => 'OrderViewsController',
+      'view modes' => array(
+        'full' => array(
+          'label' => t('Full content'),
+          'custom settings' => TRUE
+        )
+      )
+    )
+  );
+}
+
+
+
+/**
+ * Implements hook_menu().
+ * Add menu for order
+ */
+function order_menu()
+{
+  $item = array();
+  $item['order/add'] = array(
+    'title' => t('Thêm hóa đơn'),
+    'access arguments' => array('order:*:add'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('order_add_form', 2),
+    'file' => 'includes/order.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  $item['order/edit/%order'] = array(
+    'title' => t('Cập nhật hóa đơn'),
+    'access arguments' => array('order:*:edit'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('order_add_form', 2),
+    'file' => 'includes/order.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+
+  $item['order/delete/%order'] = array(
+    'title' => t('Xóa hóa đơn'),
+    'access arguments' => array('order:*:delete'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('order_delete_form', 2),
+    'file' => 'includes/order.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  return $item;
+}
+
+/**
+ * Implement hook_views_api
+ * @return array
+ */
+function order_views_api()
+{
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'order') . '/includes/views',
+  );
+}
+
+/**
+ * @param $id
+ * @return mixedImplement hook_entity_load
+ * Order_load
+ */
+function order_load($id)
+{
+  $entity = order_load_multiple(array($id));
+  return reset($entity);
+}
+
+/**
+ * Implements cook table Load Multiple
+ * @Param $ids = array();
+ */
+function order_load_multiple($ids)
+{
+  return entity_load('order', $ids);
+}
+
+/**
+ * Implements cook table Create
+ */
+function order_create($entity)
+{
+  return entity_save('order', $entity);
+}
+
+/**
+ * Implements cook table Cupdate
+ */
+function order_save($entity)
+{
+  return entity_save('order', $entity);
+}
+
+/**
+ * @param $ids
+ * @param $conditions
+ * @return mixed
+ * Implements load cook table with condition
+ */
+function order_load_multiple_with_conditions($ids, $conditions)
+{
+  return entity_load('order', $ids, $conditions);
+}
+
+/**
+ * Implements order delete
+ */
+function order_delete($id)
+{
+  return entity_delete('order', $id);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function order_permission()
+{
+  return array(
+    'order:*:add' => array(
+      'title' => t('Thêm hóa đơn'),
+    ),
+    'order:*:edit' => array(
+      'title' => t('Cập nhật hóa đơn'),
+    ),
+    'order:*:delete' => array(
+      'title' => t('Xóa hóa đơn'),
+    ),
+
+    'order:*:manage' => array(
+      'title' => t('Quản lí hóa đơn'),
+    ),
+  );
+}
+
+/**
+ * Implement check exit cook table
+ */
+function order_get_order($field, $value)
+{
+  $query = db_select('order', 'd');
+  $query->fields('d');
+  $query->condition($field, $value, '=');
+  $result = $query->execute()->fetchAll();
+  if ($result) {
+    return $result;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * @param $entity_type
+ * @param $entity
+ * @param $field
+ * @param $instance
+ * @param $langcode
+ * @param $items
+ * @param $display
+ * @return array
+ * Implement hook_field_formatter_view()
+ */
+function order_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array(); // Initialize the var
+  $settings = $display['settings']; // get the settings
+  dsm($display);
+  return $element;
+}

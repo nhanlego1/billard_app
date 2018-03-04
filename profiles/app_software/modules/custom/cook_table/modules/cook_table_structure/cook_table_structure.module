@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Cook table structure feature.
+ */
+
+include_once 'cook_table_structure.features.inc';

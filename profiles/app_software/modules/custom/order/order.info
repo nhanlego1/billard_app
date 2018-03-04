@@ -1,0 +1,11 @@
+name = Order Billing
+description = Aplication software for billing
+package = order
+core = 7.x
+version = "7.x-0.1-beta"
+project = "App"
+
+files[] = includes/order.controller.inc
+files[] = includes/order.views_controller.inc
+fields[] = includes/handler/order_handler_field_created.inc
+fields[] = includes/handler/order_handler_field_changed.inc

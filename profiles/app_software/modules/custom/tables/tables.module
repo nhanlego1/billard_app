@@ -1,0 +1,183 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: admin
+ * Date: 6/8/16
+ * Time: 9:39 PM
+ * To change this template use File | Settings | File Templates.
+ */
+/**
+ * Implement hook_entity
+ */
+
+function tables_entity_info()
+{
+  return array(
+    'tables' => array(
+      "label" => "Table",
+      "base table" => "tables",
+      'controller class' => 'TablesController',
+      "fieldable" => false,
+      'entity keys' => array(
+        'id' => 'id',
+      ),
+      'views controller class' => 'TablesViewsController',
+      'view modes' => array(
+        'full' => array(
+          'label' => t('Full content'),
+          'custom settings' => TRUE
+        )
+      )
+    )
+  );
+}
+
+
+/**
+ * Implements hook_menu().
+ * Add menu for order
+ */
+function tables_menu()
+{
+  $item = array();
+  $item['tables/add'] = array(
+    'title' => t('Thêm bàn'),
+    'access arguments' => array('tables:*:add'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tables_add_form', 2),
+    'file' => 'includes/tables.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  $item['tables/edit/%tables'] = array(
+    'title' => t('Cập nhật bàn'),
+    'access arguments' => array('tables:*:edit'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tables_add_form', 2),
+    'file' => 'includes/tables.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+
+  $item['tables/delete/%tables'] = array(
+    'title' => t('Xóa bàn'),
+    'access arguments' => array('tables:*:delete'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tables_delete_form', 2),
+    'file' => 'includes/tables.page.inc',
+    'type' => MENU_LOCAL_ACTION
+  );
+  return $item;
+}
+
+/**
+ * Implement hook_views_api
+ * @return array
+ */
+function tables_views_api()
+{
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'tables') . '/includes/views',
+  );
+}
+
+/**
+ * @param $id
+ * @return mixedImplement hook_entity_load
+ * Order_load
+ */
+function tables_load($id)
+{
+  $entity = tables_load_multiple(array($id));
+  return reset($entity);
+}
+
+/**
+ * Implements cook table Load Multiple
+ * @Param $ids = array();
+ */
+function tables_load_multiple($ids)
+{
+  return entity_load('tables', $ids);
+}
+
+/**
+ * Implements cook table Create
+ */
+function tables_create($entity)
+{
+  return entity_save('tables', $entity);
+}
+
+/**
+ * Implements cook table Cupdate
+ */
+function tables_save($entity)
+{
+  return entity_save('tables', $entity);
+}
+
+/**
+ * @param $ids
+ * @param $conditions
+ * @return mixed
+ * Implements load cook table with condition
+ */
+function tables_load_multiple_with_conditions($ids, $conditions)
+{
+  return entity_load('tables', $ids, $conditions);
+}
+
+/**
+ * Implements order delete
+ */
+function tables_delete($id)
+{
+  return entity_delete('tables', $id);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function tables_permission()
+{
+  return array(
+    'tables:*:add' => array(
+      'title' => t('Thêm bàn'),
+    ),
+    'tables:*:edit' => array(
+      'title' => t('Cập nhật bàn'),
+    ),
+    'tables:*:delete' => array(
+      'title' => t('Xóa bàn'),
+    ),
+  );
+}
+
+/**
+ * Implement check exit cook table
+ */
+function tables_get_tables($field, $value)
+{
+  $query = db_select('tables', 'd');
+  $query->fields('d');
+  $query->condition($field, $value, '=');
+  $result = $query->execute()->fetchAll();
+  if ($result) {
+    return $result;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Implement hook_page_alter
+ */
+function tables_page_alter(&$page){
+  if($_GET['q']=='admin/tables/manager'){
+    $page['content']['add_tables'] = array(
+      '#weight' => 100,
+      '#markup' => ' <ul class="action-links"><li><a href="/tables/add">Thêm bàn</a></li></ul>',
+    );
+  }
+
+}

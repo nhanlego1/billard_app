@@ -447,6 +447,7 @@ a.action, a.action-links {
     .item-amount label{
         text-align: right;
         float: left;
+        margin-right: 50px;
     }
     .item-amount span{
         text-align: left;

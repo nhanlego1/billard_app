@@ -364,13 +364,23 @@ a.action, a.action-links {
         display: block;
     }
     table, thead, tbody, td, tr {
-        display: block;
+        /*display: inline-block;*/
+        width: 100%;
     }
-    /*th {*/
-        /*display: none;*/
-    /*}*/
+
     table th, table th.checkbox, table td{
         padding: 0px!important;
+    }
+    table th {
+        border-bottom: none;
+        vertical-align: top;
+        width: 33%;
+        padding: 10px;
+    }
+    table td {
+        color: #333;
+        font-size: 0.928em;
+        width: auto;
     }
     #edit-cook-table .form-type-checkbox {
         width: 50%!important;

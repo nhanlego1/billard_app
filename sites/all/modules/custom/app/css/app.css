@@ -367,6 +367,9 @@ a.action, a.action-links {
         /*display: inline-block;*/
         width: 100%;
     }
+    table.table-list-wrapper tr{
+        display: inline-block;
+    }
 
     table th, table th.checkbox, table td{
         padding: 0px!important;

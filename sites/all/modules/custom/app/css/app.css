@@ -374,7 +374,7 @@ a.action, a.action-links {
         display: inline-block;
     }
 
-    table th, table th.checkbox, table td{
+    table th.checkbox{
         padding: 0px!important;
     }
     table th {

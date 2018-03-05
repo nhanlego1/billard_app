@@ -11,7 +11,7 @@
 <div class="header-total-fun">
   <h3>Tổng doanh thu: <?php print number_format($fun['total']); ?> đ</h3>
 </div>
-<table>
+<table class="bordered highlight responsive-table" >
   <tr><th>Hóa đơn</th><th>Ngày</th><th>Tổng cộng</th></tr>
   <tbody>
   <?php if($fun['orders']): ?>

@@ -376,6 +376,9 @@ a.action, a.action-links {
         width: 50%!important;
         float: left;
     }
+    table{
+        border-collapse: collapse;
+    }
 }
 @media print
 {

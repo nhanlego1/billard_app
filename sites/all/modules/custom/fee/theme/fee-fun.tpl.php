@@ -12,9 +12,8 @@
   <h3>Tổng doanh thu: <?php print number_format($fun['total']); ?> đ</h3>
 </div>
 <table class="bordered highlight responsive-table" >
-
-  <tbody>
   <tr><th>Hóa đơn</th><th>Ngày</th><th>Tổng cộng</th></tr>
+  <tbody>
   <?php if($fun['orders']): ?>
   <?php foreach($fun['orders'] as $order): ?>
         <tr>

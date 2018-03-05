@@ -366,9 +366,9 @@ a.action, a.action-links {
     table, thead, tbody, td, tr {
         display: block;
     }
-    th {
-        display: none;
-    }
+    /*th {*/
+        /*display: none;*/
+    /*}*/
     table th, table th.checkbox, table td{
         padding: 0px!important;
     }

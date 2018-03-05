@@ -378,7 +378,7 @@ a.action, a.action-links {
         padding: 0px!important;
     }
     table th, table th.checkbox, table td {
-        padding: 0px 9px;
+        padding: 0px 9px!important;
     }
     table th {
         border-bottom: none;

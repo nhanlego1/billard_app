@@ -367,7 +367,10 @@ a.action, a.action-links {
         /*display: inline-block;*/
         width: 100%;
     }
-    table.table-list-wrapper tr{
+    table.table-list-wrapper tr,
+    table.table-list-wrapper thead,
+    table.table-list-wrapper tbody,
+    table.table-list-wrapper td{
         display: inline-block;
     }
 
